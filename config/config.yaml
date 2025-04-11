@@ -1,0 +1,9 @@
+app:
+  name: test-sharing-vision
+  port: 2025
+database:
+  user: "root"
+  password: ""
+  host: 127.0.0.1
+  port: 3306
+  name: "article"
