@@ -66,7 +66,7 @@ func GetData(c *gin.Context) {
 	offsetStr := c.Query("offset")
 	offset, err := strconv.Atoi(offsetStr)
 	if err != nil {
-		offset = 10
+		offset = 0
 	}
 	request.Offset = offset
 
