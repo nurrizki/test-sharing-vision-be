@@ -48,6 +48,29 @@ Setelah setup awal, kamu bisa menjalankan aplikasi tanpa flag:
 go run main.go
 ```
 
+---
+
+## 🔐 Authorization
+Semua endpoint memerlukan Basic Auth:
+
+Header:
+```bash
+Authorization: Basic base64(username:password)
+```
+---
+
+### 📋 API Endpoints
+
+| Method | Endpoint          | Deskripsi                     | Params / Body                                                                 |
+|--------|-------------------|-------------------------------|--------------------------------------------------------------------------------|
+| GET    | `/article`        | Ambil daftar artikel          | Query: `id`, `title`, `content`, `category`, `status`, `limit`, `offset`     |
+| GET    | `/article/:id`    | Ambil detail artikel by ID    | URL Param: `id`                                                               |
+| POST   | `/article`        | Tambah artikel                | Body: `title`, `content`, `category`, `status`                               |
+| PUT    | `/article/:id`    | Edit artikel                  | Body: `id`, `title`, `content`, `category`, `status`                         |
+| DELETE | `/article/:id`    | Hapus artikel                 | URL Param: `id`                                                               |
+
+---
+
 ## 📚 Dokumentasi API
 
 Untuk dokumentasi lengkap, silakan kunjungi:  
