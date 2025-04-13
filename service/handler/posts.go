@@ -3,6 +3,7 @@ package handler
 import (
 	"log"
 	"net/http"
+	"strconv"
 	"test-sharing-vision/constant"
 	"test-sharing-vision/service/controller"
 	"test-sharing-vision/service/model"
@@ -50,15 +51,24 @@ func InsertData(c *gin.Context) {
 func GetData(c *gin.Context) {
 
 	var request request.GetPosts
-	err := c.BindJSON(&request)
+
+	request.Title = c.Query("title")
+	request.Content = c.Query("content")
+	request.Category = c.Query("category")
+	request.Status = c.Query("status")
+	limitStr := c.Query("limit")
+	limit, err := strconv.Atoi(limitStr)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, model.GeneralResponse{
-			Status:  constant.ResponseStatusFailed,
-			Message: err.Error(),
-			Data:    nil,
-		})
-		return
+		limit = 10
 	}
+	request.Limit = limit
+
+	offsetStr := c.Query("offset")
+	offset, err := strconv.Atoi(offsetStr)
+	if err != nil {
+		offset = 10
+	}
+	request.Offset = offset
 
 	// set default limit
 	if request.Limit < 1 {
